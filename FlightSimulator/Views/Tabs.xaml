@@ -1,0 +1,31 @@
+﻿<UserControl x:Class="FlightSimulator.Views.Tabs"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:FlightSimulator.Views"
+             mc:Ignorable="d" 
+             d:DesignHeight="650" d:DesignWidth="750" Background="White">
+    <Grid>
+        <TabControl>
+            <TabItem Header="Manual" FontSize="20" FontWeight="Bold">
+                <Grid>
+                    <local:JoistickWin>
+
+                    </local:JoistickWin>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Auto Pilot" FontSize="20" FontWeight="Bold">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="97*"/>
+                        <ColumnDefinition Width="648*"/>
+                    </Grid.ColumnDefinitions>
+                    <local:AutoPilot Grid.ColumnSpan="2" Margin="0,0,-0.2,0">
+
+                    </local:AutoPilot>
+                </Grid>
+            </TabItem>
+        </TabControl>
+    </Grid>
+</UserControl>

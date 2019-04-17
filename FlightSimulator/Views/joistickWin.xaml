@@ -1,0 +1,50 @@
+﻿<UserControl x:Class="FlightSimulator.Views.JoistickWin"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:FlightSimulator.Views"
+             mc:Ignorable="d" 
+             d:DesignHeight="600" d:DesignWidth="750" Background="White">
+    <Grid>
+
+        <TextBox x:Name="elevatorValue" Text="Bind" TextAlignment="Center" Height="50" Width="100"  Grid.Column="3" Grid.Row="2" HorizontalAlignment="Right" VerticalAlignment="Top" FontSize="25"/>
+        <TextBox x:Name="aileronValue"  Text="Bind" Height="50" Width="100"  Grid.Column="2" Grid.Row="1" HorizontalAlignment="Right" FontSize="25" TextAlignment="Center"/>
+
+        <TextBox x:Name="rudderValue" Text="{Binding ElementName=RudderSlider, Path=Value, UpdateSourceTrigger=PropertyChanged}" Height="50" Width="40"  Grid.Column="2" Grid.Row="3" HorizontalAlignment="Right" FontSize="25"/>
+        <Slider x:Name="RudderSlider" Minimum="-1" Maximum="1"  VerticalAlignment="Center" TickPlacement="BottomRight" TickFrequency="0.1" Grid.Column="2" Grid.Row="3" Width="300"/>
+        
+        <TextBox x:Name="throttleValue" Text="{Binding ElementName=ThrottleSlider, Path=Value, UpdateSourceTrigger=PropertyChanged}" Height="50" Width="40"  Grid.Column="1" Grid.Row="2" HorizontalAlignment="Right" VerticalAlignment="Top" FontSize="25"/>
+        <Slider x:Name="ThrottleSlider" Minimum="-1" Maximum="1" HorizontalAlignment="Center" TickPlacement="BottomRight" TickFrequency="0.1" Grid.Column="1" Grid.Row="2" Width="300">
+            <Slider.LayoutTransform>
+                <RotateTransform Angle="90"></RotateTransform>
+            </Slider.LayoutTransform>
+        </Slider>
+        <local:Joystick Grid.Row="2" Grid.Column="2"></local:Joystick>
+        <TextBox x:Name ="aileron" Text="← aileron →" HorizontalAlignment="Left" FontSize="30" Width="300" Grid.Row="1" TextAlignment="Center" Grid.Column="2"></TextBox>
+        <TextBox x:Name ="throttle" Text="← throttle →" FontSize="30" Width="350" Height="50" TextAlignment="Center" Grid.Row="2" Grid.Column="0">
+            <TextBox.LayoutTransform>
+                <RotateTransform Angle="90"></RotateTransform>
+            </TextBox.LayoutTransform>
+        </TextBox>
+        <TextBox x:Name ="rudder" Text="← rudder →" FontSize="30" Grid.Row="5" TextAlignment="Center" Grid.Column="2"/>
+        <TextBox x:Name ="elevator" Text="← elevator →" FontSize="30" Width="250" Height="50" TextAlignment="Center" Grid.Row="2" Grid.Column="3" HorizontalAlignment="Center">
+            <TextBox.LayoutTransform>
+                <RotateTransform Angle="90"></RotateTransform>
+            </TextBox.LayoutTransform>
+        </TextBox>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50" />
+            <RowDefinition Height="50" />
+            <RowDefinition Height="350" />
+            <RowDefinition Height="100" />
+            <RowDefinition Height="50" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="50" />
+            <ColumnDefinition Width="150" />
+            <ColumnDefinition Width="400" />
+            <ColumnDefinition Width="150" />
+        </Grid.ColumnDefinitions>
+    </Grid>
+</UserControl>
