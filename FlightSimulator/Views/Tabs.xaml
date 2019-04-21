@@ -5,12 +5,16 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:FlightSimulator.Views"
              mc:Ignorable="d" 
-             d:DesignHeight="650" d:DesignWidth="750" Background="White">
+             d:DesignHeight="600" d:DesignWidth="700" Background="White">
     <Grid>
         <TabControl>
             <TabItem Header="Manual" FontSize="20" FontWeight="Bold">
                 <Grid>
-                    <local:JoistickWin>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="158*"/>
+                        <ColumnDefinition Width="587*"/>
+                    </Grid.ColumnDefinitions>
+                    <local:JoistickWin Grid.ColumnSpan="2" Margin="0,0,-0.2,0.4">
 
                     </local:JoistickWin>
                 </Grid>

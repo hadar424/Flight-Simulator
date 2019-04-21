@@ -1,4 +1,5 @@
-﻿using FlightSimulator.ViewModels;
+﻿using FlightSimulator.Model;
+using FlightSimulator.ViewModels.Windows;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,15 +18,14 @@ using System.Windows.Shapes;
 namespace FlightSimulator.Views
 {
     /// <summary>
-    /// Interaction logic for FlightBoardWin.xaml
+    /// Interaction logic for SettingsWin.xaml
     /// </summary>
-    public partial class FlightBoardWin : UserControl
+    public partial class SettingsWin : Window
     {
-        public FlightBoardWin()
+        public SettingsWin()
         {
             InitializeComponent();
-            DataContext = new FlightBoardButtons();
-
+            DataContext = new SettingsWindowViewModel(ApplicationSettingsModel.Instance,this);
         }
     }
 }

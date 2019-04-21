@@ -5,22 +5,20 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:FlightSimulator.Views"
              mc:Ignorable="d" 
-             d:DesignHeight="600" d:DesignWidth="750" Background="White">
+             d:DesignHeight="550" d:DesignWidth="650" Background="White">
     <Grid>
-
-        <Button x:Name="clear" Content="Clear" Grid.Row="2" Grid.Column="3" ClickMode="Press" VerticalAlignment="Center" FontSize="20" Width="100" Height="50" Background="White" BorderBrush="Black"/>
-        <Button x:Name="ok" Content="OK" Grid.Row="2" Grid.Column="2" ClickMode="Press" VerticalAlignment="Center" FontSize="20" Width="100" Height="50" Background="White" BorderBrush="Black"/>
+        <TextBox x:Name="AutoPilotText" Grid.ColumnSpan="3" Grid.Row="0" BorderBrush="Black"></TextBox>
+        <Button x:Name="clear" Content="Clear" Grid.Row="1" Grid.Column="2" ClickMode="Press" VerticalAlignment="Center" FontSize="20" Width="100" Height="50" Background="White" BorderBrush="Black" HorizontalAlignment="Left"/>
+        <Button x:Name="ok" Content="OK" Grid.Row="1" Grid.Column="0" ClickMode="Press" VerticalAlignment="Center" FontSize="20" Width="100" Height="50" Background="White" BorderBrush="Black" HorizontalAlignment="Right"/>
         
         <Grid.RowDefinitions>
-            <RowDefinition Height="50"/>
-            <RowDefinition Height="450" />
-            <RowDefinition Height="100" />
-        </Grid.RowDefinitions>
+            <RowDefinition Height="500"/>
+            <RowDefinition Height="50" />
+            </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="100" />
-            <ColumnDefinition Width="150" />
-            <ColumnDefinition Width="150" />
-            <ColumnDefinition Width="150" />
+            <ColumnDefinition Width="300" />
+            <ColumnDefinition Width="50" />
+            <ColumnDefinition Width="300" />
         </Grid.ColumnDefinitions>
         
     </Grid>
