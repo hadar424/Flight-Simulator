@@ -1,6 +1,7 @@
 ﻿using FlightSimulator.Model.Interface;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.Sockets;
@@ -15,16 +16,20 @@ namespace FlightSimulator.Model
         private int port;
         private TcpListener listener;
         private IClientHandler ch;
-        public Server(int port, IClientHandler ch)
+        private StreamReader reader;
+        private NetworkStream stream;
+        private string ip;
+        public Server(int port, IClientHandler ch, string IP)
         {
             this.port = port;
             this.ch = ch;
+            ip = IP;
             Start();
         }
         public void Start()
         {
-            IPEndPoint ep = new
-            IPEndPoint(IPAddress.Parse("127.0.0.1"), port);
+
+            IPEndPoint ep = new IPEndPoint(IPAddress.Parse(ip), port);
             listener = new TcpListener(ep);
             listener.Start();
             Console.WriteLine("Waiting for connections...");
@@ -33,9 +38,12 @@ namespace FlightSimulator.Model
                 {
                     try
                     {
+                        Console.WriteLine("while loop");
                         TcpClient client = listener.AcceptTcpClient();
                         Console.WriteLine("Got new connection");
                         ch.HandleClient(client);
+
+                
                     }
                     catch (SocketException)
                     {
@@ -50,5 +58,9 @@ namespace FlightSimulator.Model
         {
             listener.Stop();
         }
+
+
+
+
     }
 }

@@ -12,12 +12,28 @@ namespace FlightSimulator.ViewModels
 
         public double Lon
         {
-            get;
+            get
+            {
+                return Lon;
+            }
+            set
+            {
+                Lon = value;
+                NotifyPropertyChanged("Lon");
+            }
         }
 
         public double Lat
         {
-            get;
+            get
+            {
+                return Lat;
+            }
+            set
+            {
+                Lat = value;
+                NotifyPropertyChanged("Lat");
+            }
         }
     }
 }

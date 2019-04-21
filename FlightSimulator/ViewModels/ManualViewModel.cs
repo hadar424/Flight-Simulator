@@ -11,10 +11,34 @@ namespace FlightSimulator.ViewModels
     {
         ManualModel manual = new ManualModel();
 
-        public void Throttle
+        public double Throttle
         {
             set {
-                manual.Send("/controls/engines/engine/throttle " + ToString);
+                manual.Send("/controls/engines/engine/throttle " + value.ToString());
+            }
+        }
+
+        public double Rudder
+        {
+            set
+            {
+                manual.Send("/controls/flight/rudder " + value.ToString());
+            }
+        }
+
+        public double Aileron
+        {
+            set
+            {
+                manual.Send("/controls/flight/aileron " + value.ToString());
+            }
+        }
+
+        public double Elevator
+        {
+            set
+            {
+                manual.Send("/controls/flight/elevator " + value.ToString());
             }
         }
 

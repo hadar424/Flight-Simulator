@@ -15,9 +15,9 @@ namespace FlightSimulator.Model
             client = c;
         }*/
 
-        public void Send()
+        public void Send(string s)
         {
-
+            client.Send(s);
         }
 
        

@@ -42,8 +42,9 @@ namespace FlightSimulator.ViewModels
             int infoPort = ApplicationSettingsModel.Instance.FlightInfoPort;
             int commandoPort = ApplicationSettingsModel.Instance.FlightCommandPort;
             string serverIP = ApplicationSettingsModel.Instance.FlightServerIP;
+            Console.WriteLine(infoPort.ToString() + commandoPort + serverIP.ToString());
             ClientHandler myClient = new ClientHandler();
-            Server myServer = new Server(infoPort, myClient);
+            Server myServer = new Server(infoPort, myClient,serverIP);
             
         }
     }
