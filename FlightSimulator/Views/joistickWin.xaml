@@ -7,11 +7,11 @@
              mc:Ignorable="d" 
              d:DesignHeight="550" d:DesignWidth="700" Background="White">
     <Grid>
-        <TextBox x:Name="elevatorValue" Text="Bind" TextAlignment="Center" Height="50" Width="100"  Grid.Column="3" Grid.Row="1" HorizontalAlignment="Right" VerticalAlignment="Top" FontSize="25" Margin="0,0.4,-86.8,0"/>
-        <TextBox x:Name="aileronValue"  Text="Bind" Height="50" Width="100"  Grid.Column="2" Grid.Row="0" HorizontalAlignment="Right" FontSize="25" TextAlignment="Center"/>
+        <TextBox x:Name="elevatorValue" Text="{Binding Elevator}" TextAlignment="Center" Height="50" Width="100"  Grid.Column="3" Grid.Row="1" HorizontalAlignment="Right" VerticalAlignment="Top" FontSize="25" Margin="0,0.4,-86.8,0"/>
+        <TextBox x:Name="aileronValue"  Text="{Binding Aileron}" Height="50" Width="100"  Grid.Column="2" Grid.Row="0" HorizontalAlignment="Right" FontSize="25" TextAlignment="Center" />
 
         <TextBox x:Name="rudderValue" Text="{Binding ElementName=RudderSlider, Path=Value, UpdateSourceTrigger=PropertyChanged, StringFormat=#0.00}" Height="50" Width="50"  Grid.Column="2" Grid.Row="2" HorizontalAlignment="Right" FontSize="18" VerticalAlignment="Top"/>
-        <Slider x:Name="RudderSlider" Minimum="-1" Maximum="1"  VerticalAlignment="Bottom" TickPlacement="BottomRight" TickFrequency="0.1" Grid.Column="2" Grid.Row="2" Width="300"/>
+        <Slider x:Name="RudderSlider" Minimum="-1" Maximum="1"  VerticalAlignment="Bottom" TickPlacement="BottomRight" TickFrequency="0.1" Grid.Column="2" Grid.Row="2" Width="300" Value="{Binding Rudder}"/>
 
         <TextBox x:Name="throttleValue" Text="{Binding ElementName=ThrottleSlider, Path=Value, UpdateSourceTrigger=PropertyChanged,StringFormat=#0.00}" Height="50" Width="50"  Grid.Column="1" Grid.Row="1" HorizontalAlignment="Right" VerticalAlignment="Top" FontSize="18"/>
         <Slider x:Name="ThrottleSlider" Minimum="-1" Maximum="1" HorizontalAlignment="Center" TickPlacement="BottomRight" TickFrequency="0.1" Grid.Column="1" Grid.Row="1" Width="300" Value="{Binding Throttle}">
