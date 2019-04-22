@@ -12,8 +12,9 @@ namespace FlightSimulator.ViewModels
 
         public double Throttle
         {
-            set {
-                manual.Send("/controls/engines/engine/throttle " + value.ToString());
+            set
+            {
+                manual.Send("set /controls/engines/engine/throttle " + Math.Round(value, 2).ToString() + "\r\n");
             }
         }
 
@@ -21,7 +22,7 @@ namespace FlightSimulator.ViewModels
         {
             set
             {
-                manual.Send("/controls/flight/rudder " + value.ToString());
+                manual.Send("set /controls/flight/rudder " + Math.Round(value, 2).ToString() + "\r\n");
             }
         }
 
@@ -29,7 +30,7 @@ namespace FlightSimulator.ViewModels
         {
             set
             {
-                manual.Send("/controls/flight/aileron " + value.ToString());
+                manual.Send("set /controls/flight/aileron " + Math.Round(value, 2).ToString() + "\r\n");
             }
         }
 
@@ -37,7 +38,7 @@ namespace FlightSimulator.ViewModels
         {
             set
             {
-                manual.Send("/controls/flight/elevator " + value.ToString());
+                manual.Send("set /controls/flight/elevator " + Math.Round(value, 2).ToString() + "\r\n");
             }
         }
 

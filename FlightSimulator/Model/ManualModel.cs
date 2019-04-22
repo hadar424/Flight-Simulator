@@ -8,16 +8,10 @@ namespace FlightSimulator.Model
 {
     class ManualModel
     {
-        private ClientHandler client;
-        /*
-        public ManualModel(ClientHandler c)
-        {
-            client = c;
-        }*/
 
         public void Send(string s)
         {
-            client.Send(s);
+            CommandChannel.Instance.Send(s);
         }
 
        

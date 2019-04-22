@@ -99,13 +99,15 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Model\ApplicationSettingsModel.cs" />
+    <Compile Include="Model\AutoPilotModel.cs" />
     <Compile Include="Model\CommandHandler.cs" />
     <Compile Include="Model\EventArgs\VirtualJoystickEventArgs.cs" />
-    <Compile Include="Model\HandleClient.cs" />
+    <Compile Include="Model\CommandChannel.cs" />
     <Compile Include="Model\Interface\IClientHandler.cs" />
     <Compile Include="Model\Interface\ISettingsModel.cs" />
     <Compile Include="Model\ManualModel.cs" />
-    <Compile Include="Model\Server.cs" />
+    <Compile Include="Model\InfoChannel.cs" />
+    <Compile Include="ViewModels\AutoPilotViewModel.cs" />
     <Compile Include="ViewModels\BaseNotify.cs" />
     <Compile Include="ViewModels\FlightBoardButtons.cs" />
     <Compile Include="ViewModels\FlightBoardViewModel.cs" />

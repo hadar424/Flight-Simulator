@@ -9,29 +9,33 @@ namespace FlightSimulator.ViewModels
 {
     public class FlightBoardViewModel : BaseNotify
     {
+        private double lon = 0;
+        private double lat = 0;
 
         public double Lon
         {
             get
             {
-                return Lon;
+                return lon;
             }
+            
             set
             {
-                Lon = value;
+                lon = value;
                 NotifyPropertyChanged("Lon");
             }
         }
 
         public double Lat
         {
+           
             get
             {
-                return Lat;
+                return lat;
             }
             set
             {
-                Lat = value;
+                lat = value;
                 NotifyPropertyChanged("Lat");
             }
         }

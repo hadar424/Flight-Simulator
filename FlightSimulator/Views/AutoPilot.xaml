@@ -7,9 +7,9 @@
              mc:Ignorable="d" 
              d:DesignHeight="550" d:DesignWidth="650" Background="White">
     <Grid>
-        <TextBox x:Name="AutoPilotText" Grid.ColumnSpan="3" Grid.Row="0" BorderBrush="Black"></TextBox>
-        <Button x:Name="clear" Content="Clear" Grid.Row="1" Grid.Column="2" ClickMode="Press" VerticalAlignment="Center" FontSize="20" Width="100" Height="50" Background="White" BorderBrush="Black" HorizontalAlignment="Left"/>
-        <Button x:Name="ok" Content="OK" Grid.Row="1" Grid.Column="0" ClickMode="Press" VerticalAlignment="Center" FontSize="20" Width="100" Height="50" Background="White" BorderBrush="Black" HorizontalAlignment="Right"/>
+        <TextBox x:Name="AutoPilotText" Grid.ColumnSpan="3" Grid.Row="0" BorderBrush="Black" Text="{Binding AutoPilotText}" Background="{Binding ChangeColor}"></TextBox>
+        <Button x:Name="clear" Content="Clear" Grid.Row="1" Grid.Column="2" ClickMode="Press" VerticalAlignment="Center" FontSize="20" Width="100" Height="50" Background="White" BorderBrush="Black" HorizontalAlignment="Left" Command="{Binding ClearButton}"/>
+        <Button x:Name="ok" Content="OK" Grid.Row="1" Grid.Column="0" ClickMode="Press" VerticalAlignment="Center" FontSize="20" Width="100" Height="50" Background="White" BorderBrush="Black" HorizontalAlignment="Right" Command="{Binding OkButton}"/>
         
         <Grid.RowDefinitions>
             <RowDefinition Height="500"/>
