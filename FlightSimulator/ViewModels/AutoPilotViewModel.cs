@@ -32,7 +32,7 @@ namespace FlightSimulator.ViewModels
             }
         }
 
-    
+     
 
         public string AutoPilotText
         {
