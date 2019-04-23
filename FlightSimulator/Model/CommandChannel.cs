@@ -17,7 +17,6 @@ namespace FlightSimulator.Model
     {
         private int port;
         private string ip;
-        private StreamWriter writer;
         private NetworkStream stream;
         private Socket client;
 
@@ -69,7 +68,6 @@ namespace FlightSimulator.Model
 
             }
             stream = new NetworkStream(client);
-            writer = new StreamWriter(stream);
             Console.WriteLine("connected");
             Console.WriteLine(client.Connected);
          
@@ -80,17 +78,41 @@ namespace FlightSimulator.Model
 
         public void Send(string s)
         {
-            new Task(() =>
+            Thread thread = new Thread(() =>
             {
+                Console.WriteLine(s);
                 if (client.Connected)
                 {
-                    Console.WriteLine(s);
-                    // לעשות בדיקות קלט לפני שליחה
-                    writer.Write(s);
+                    string commandLine = "";
+                    while (s != "")
+                    {
+                        if (s.IndexOf("\n") == -1)
+                        {
+                            Console.WriteLine("-last: " + s + "-\n");
+                            Byte[] buffer = Encoding.ASCII.GetBytes(s + "\r\n");
+                            stream.Write(buffer, 0, buffer.Length);
+                            s = "";
+                        }
+                        else
+                        {
+                            commandLine = s.Substring(0, s.IndexOf("\n") - 1);
+                            s = s.Remove(0, s.IndexOf("\n") + 1);
+                            Console.Write("command: " + commandLine + "-\n");
+                            Console.Write("remain: " + s + "-\n");
+                            // לעשות בדיקות קלט לפני שליחה
+                            Byte[] buffer = Encoding.ASCII.GetBytes(commandLine + "\r\n");
+                            stream.Write(buffer, 0, buffer.Length);
+                            Thread.Sleep(2000);
+                        }
+                    }
                 }
-            }).Start();
+            });
+            thread.Start();
 
         }
+          
+
+        
 
     }
 }

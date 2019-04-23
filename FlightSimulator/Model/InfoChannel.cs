@@ -50,12 +50,12 @@ namespace FlightSimulator.Model
 
         public void Start()
         {
-
             IPEndPoint ep = new IPEndPoint(IPAddress.Parse(ip), port);
             listener = new TcpListener(ep);
             listener.Start();
             Console.WriteLine("Waiting for connections...");
-            Thread thread = new Thread(() => {
+            Thread thread = new Thread(() =>
+            {
                 while (true)
                 {
                     try
@@ -63,7 +63,7 @@ namespace FlightSimulator.Model
                         client = listener.AcceptSocket();
                         Console.WriteLine("Got new connection");
                         ReadInfo(client);
-                     
+
 
                     }
                     catch (SocketException)
@@ -82,36 +82,38 @@ namespace FlightSimulator.Model
 
         public void ReadInfo(Socket client)
         {
+            string info = "";
             new Task(() =>
             {
                 stream = new NetworkStream(client);
                 reader = new StreamReader(stream);
                 {
-                    while(client.Connected)
+                    while (client.Connected)
                     {
-                        string infoLine = reader.ReadLine();
-                        //Console.WriteLine(infoLine);
-                        HandleInfo(infoLine);
+                        info = reader.ReadLine();
+                        HandleInfo(info);
                     }
                 }
             }).Start();
         }
 
         public void HandleInfo(string info)
-        {   if(info !=null)
+        {
+            if (info != null)
             {
                 int first = info.IndexOf(",");
                 int second = info.IndexOf(",", info.IndexOf(",") + 1);
-                string lon = info.Substring(0, first);
-                string lat = info.Substring(first + 1, second - first);
-                /*
-                FlightBoardViewModel flightBoard = new FlightBoardViewModel();
-                flightBoard.Lon = Double.Parse(lon);
-                flightBoard.Lat = Double.Parse(lat);*/
+                string lon = info.Substring(0, first - 1);
+                string lat = info.Substring(first + 1, second - first - 1);
+
+                FlightBoardViewModel.Instance.Lon = Convert.ToDouble(lon);
+                FlightBoardViewModel.Instance.Lat = Convert.ToDouble(lat);
+                FlightBoardViewModel.Instance.NotifyPropertyChanged("Lon");
+                FlightBoardViewModel.Instance.NotifyPropertyChanged("Lat");
+
             }
 
+
         }
-
-
     }
 }

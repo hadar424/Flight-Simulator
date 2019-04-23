@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using FlightSimulator.Views;
 namespace FlightSimulator.ViewModels
 {
     class ManualViewModel
@@ -14,7 +15,7 @@ namespace FlightSimulator.ViewModels
         {
             set
             {
-                manual.Send("set /controls/engines/engine/throttle " + Math.Round(value, 2).ToString() + "\r\n");
+                manual.Send("set controls/engines/current-engine/throttle " + Math.Round(value, 2).ToString());
             }
         }
 
@@ -22,23 +23,7 @@ namespace FlightSimulator.ViewModels
         {
             set
             {
-                manual.Send("set /controls/flight/rudder " + Math.Round(value, 2).ToString() + "\r\n");
-            }
-        }
-
-        public double Aileron
-        {
-            set
-            {
-                manual.Send("set /controls/flight/aileron " + Math.Round(value, 2).ToString() + "\r\n");
-            }
-        }
-
-        public double Elevator
-        {
-            set
-            {
-                manual.Send("set /controls/flight/elevator " + Math.Round(value, 2).ToString() + "\r\n");
+                manual.Send("set controls/flight/rudder " + Math.Round(value, 2).ToString());
             }
         }
 

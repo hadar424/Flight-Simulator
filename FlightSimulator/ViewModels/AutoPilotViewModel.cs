@@ -10,10 +10,11 @@ namespace FlightSimulator.ViewModels
 {
     class AutoPilotViewModel : BaseNotify
     {
-        AutoPilotModel model = new AutoPilotModel();
+        //AutoPilotModel model = new AutoPilotModel();
         public ICommand okButton;
         private ICommand clearButton;
         public string text = "";
+        private bool IsWhite = false;
 
         public string ChangeColor 
         {
@@ -21,12 +22,15 @@ namespace FlightSimulator.ViewModels
             {
                 if(AutoPilotText == "")
                 {
-                    Console.WriteLine(AutoPilotText + "empty");
                     return "White";
-
-                   
+                    
                 } else
                 {
+                    if(IsWhite)
+                    {
+                        IsWhite = false;
+                        return "White";
+                    }
                     return "LightSalmon";
                 }
             }
@@ -58,8 +62,12 @@ namespace FlightSimulator.ViewModels
 
         private void OnClick()
         {
-            model.Send(AutoPilotText);
+            IsWhite = true;
+            NotifyPropertyChanged("ChangeColor");
+            CommandChannel.Instance.Send(AutoPilotText);
         }
+
+
 
         public ICommand ClearButton
         {
@@ -72,6 +80,7 @@ namespace FlightSimulator.ViewModels
         private void OnClick1()
         {
             AutoPilotText = "";
+            IsWhite = true;
             NotifyPropertyChanged("AutoPilotText");
             
         }

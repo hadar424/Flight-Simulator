@@ -1,4 +1,5 @@
-﻿using FlightSimulator.Model.EventArgs;
+﻿using FlightSimulator.Model;
+using FlightSimulator.Model.EventArgs;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -47,14 +48,24 @@ namespace FlightSimulator.Views
         public double Aileron
         {
             get { return Convert.ToDouble(GetValue(AileronProperty)); }
-            set { SetValue(AileronProperty, value); }
+            set
+            {
+                SetValue(AileronProperty, value);
+                Console.WriteLine("Aileron: " + value);
+                CommandChannel.Instance.Send("set controls/flight/aileron " + Math.Round(value, 2).ToString());
+            }
         }
 
         /// <summary>current Elevator (or "power"), from 0 to 100</summary>
         public double Elevator
         {
             get { return Convert.ToDouble(GetValue(ElevatorProperty)); }
-            set { SetValue(ElevatorProperty, value); }
+            set
+            {
+                SetValue(ElevatorProperty, value);
+                Console.WriteLine("Elevator: " + value);
+                CommandChannel.Instance.Send("set controls/flight/elevator " + Math.Round(value, 2).ToString());
+            }
         }
 
         /// <summary>How often should be raised StickMove event in degrees</summary>
@@ -134,9 +145,7 @@ namespace FlightSimulator.Views
 
         private void Knob_MouseMove(object sender, MouseEventArgs e)
         {
-            ///!!!!!!!!!!!!!!!!!
-            /// YOU MUST CHANGE THE FUNCTION!!!!
-            ///!!!!!!!!!!!!!!
+
             if (!Knob.IsMouseCaptured) return;
 
             Point newPos = e.GetPosition(Base);
@@ -146,8 +155,8 @@ namespace FlightSimulator.Views
             double distance = Math.Round(Math.Sqrt(deltaPos.X * deltaPos.X + deltaPos.Y * deltaPos.Y));
             if (distance >= canvasWidth / 2 || distance >= canvasHeight / 2)
                 return;
-            Aileron = -deltaPos.Y;
-            Elevator = deltaPos.X;
+            Aileron = (deltaPos.X) / 124;
+            Elevator = (-deltaPos.Y) / 124;
 
             knobPosition.X = deltaPos.X;
             knobPosition.Y = deltaPos.Y;
