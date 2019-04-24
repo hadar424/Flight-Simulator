@@ -24,10 +24,10 @@ namespace FlightSimulator.ViewModels
         }
         #endregion
 
-        private double lon = 0;
-        private double lat = 0;
+        private float lon = 0;
+        private float lat = 0;
 
-        public double Lon
+        public float Lon
         {
             get
             {
@@ -41,7 +41,7 @@ namespace FlightSimulator.ViewModels
             }
         }
 
-        public double Lat
+        public float Lat
         {
            
             get

@@ -19,6 +19,8 @@ namespace FlightSimulator.Model
         private string ip;
         private NetworkStream stream;
         private Socket client;
+        private Thread commandThread;
+        private Thread sendThread;
 
         #region Singleton
         private static CommandChannel m_Instance = null;
@@ -47,10 +49,16 @@ namespace FlightSimulator.Model
             set { ip = value; }
         }
 
+        public Thread CommandThread
+        {
+            get { return commandThread; }
+            set { commandThread = value; }
+        }
+
 
         public void Connect()
         {
-            Thread thread = new Thread(() =>
+            commandThread = new Thread(() =>
             {
             Console.WriteLine("waiting for connect");
             IPEndPoint ep = new IPEndPoint(IPAddress.Parse(ip), port);
@@ -72,15 +80,14 @@ namespace FlightSimulator.Model
             Console.WriteLine(client.Connected);
          
             });
-            thread.Start();
+            commandThread.Start();
 
         }
 
         public void Send(string s)
         {
-            Thread thread = new Thread(() =>
+            sendThread = new Thread(() =>
             {
-                Console.WriteLine(s);
                 if (client.Connected)
                 {
                     string commandLine = "";
@@ -107,12 +114,28 @@ namespace FlightSimulator.Model
                     }
                 }
             });
-            thread.Start();
+            sendThread.Start();
 
         }
-          
 
-        
+        public void Disconnect()
+        {
+          if(client.Connected)
+            {
+                if(sendThread != null)
+                {
+                    sendThread.Abort();
+                }
+                if (commandThread != null)
+                {
+                    commandThread.Abort();
+                }
+                client.Close();
+            }
+
+        }
+
+
 
     }
 }

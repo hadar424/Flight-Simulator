@@ -5,20 +5,22 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:FlightSimulator.Views"
              mc:Ignorable="d" 
-             d:DesignHeight="600" d:DesignWidth="600" Background="White">
+             d:DesignHeight="550" d:DesignWidth="450" Background="White">
     <Grid>
-        <local:FlightBoard Grid.Row="1" Grid.ColumnSpan="3" Margin="0,0.4,0,0" Grid.RowSpan="2" ></local:FlightBoard>
-        <Button x:Name="connect" Content="Connect" Grid.Row="0" Grid.Column="0" ClickMode="Press" HorizontalAlignment="Right" FontSize="20" Width="100" Height="40" Background="White" BorderBrush="Black" FontWeight="Bold" Command="{Binding ConnectCommand}"/>
-        <Button x:Name="settings" Content="Settings" Grid.Row="0" Grid.Column="2" ClickMode="Press" HorizontalAlignment="Left" FontSize="20" Width="100" Height="40" Background="White" BorderBrush="Black" FontWeight="Bold" Command="{Binding SettingsCommand}"/>
+        <local:FlightBoard Grid.Row="1" Grid.ColumnSpan="5" Margin="0,0.4,0,0" Grid.RowSpan="2" ></local:FlightBoard>
+        <Button x:Name="connect" Content="Connect" Grid.Row="0" Grid.Column="0" ClickMode="Press" HorizontalAlignment="Center" FontSize="18" Width="110" Height="40" Background="White" BorderBrush="Black" FontWeight="Bold" Command="{Binding ConnectCommand}"/>
+        <Button x:Name="settings" Content="Settings" Grid.Row="0" Grid.Column="2" ClickMode="Press" HorizontalAlignment="Center" FontSize="18" Width="110" Height="40" Background="White" BorderBrush="Black" FontWeight="Bold" Command="{Binding SettingsCommand}"/>
+        <Button x:Name="disconnect" Content="Disconnect" Grid.Row="0" Grid.Column="4" ClickMode="Press" HorizontalAlignment="Center" FontSize="18" Width="110" Height="40" Background="White" BorderBrush="Black" FontWeight="Bold" Command="{Binding DisconnectCommand}"/>
         <Grid.RowDefinitions>
             <RowDefinition Height="50" />
-            <RowDefinition Height="111.034" />
-            <RowDefinition Height="439.366"/>
+            <RowDefinition Height="500" />
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="250" />
-            <ColumnDefinition Width="50" />
-            <ColumnDefinition Width="300" />
+            <ColumnDefinition Width="140" />
+            <ColumnDefinition Width="15" />
+            <ColumnDefinition Width="140" />
+            <ColumnDefinition Width="15" />
+            <ColumnDefinition Width="140" />
         </Grid.ColumnDefinitions>
     </Grid>
 </UserControl>

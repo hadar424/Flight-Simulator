@@ -14,6 +14,7 @@ namespace FlightSimulator.ViewModels
     {
         private ICommand settingsCommand;
         private ICommand connectCommand;
+        private ICommand disconnectCommand;
         private bool isConnected = false;
         public ICommand SettingsCommand
         {
@@ -51,6 +52,20 @@ namespace FlightSimulator.ViewModels
             CommandChannel.Instance.ServerIP = serverIP;
             CommandChannel.Instance.CommandPort = commandoPort;
             CommandChannel.Instance.Connect();
+
+        }
+
+        public ICommand DisconnectCommand
+        {
+            get
+            {
+                return disconnectCommand ?? (disconnectCommand = new CommandHandler(() => OnDisconnect()));
+            }
+        }
+
+        private void OnDisconnect()
+        {
+            InfoChannel.Instance.Disconnect();
 
         }
     }

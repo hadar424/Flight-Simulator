@@ -5,20 +5,20 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:FlightSimulator.Views"
              mc:Ignorable="d" 
-             d:DesignHeight="550" d:DesignWidth="650" Background="White">
+             d:DesignHeight="550" d:DesignWidth="500" Background="White">
     <Grid>
         <TextBox x:Name="AutoPilotText" Grid.ColumnSpan="3" Grid.Row="0" BorderBrush="Black" AcceptsReturn="True" Text="{Binding AutoPilotText, UpdateSourceTrigger=PropertyChanged}" Background="{Binding ChangeColor, UpdateSourceTrigger=PropertyChanged}"></TextBox>
-        <Button x:Name="clear" Content="Clear" Grid.Row="1" Grid.Column="2" ClickMode="Press" VerticalAlignment="Center" FontSize="20" Width="100" Height="50" Background="White" BorderBrush="Black" HorizontalAlignment="Left" Command="{Binding ClearButton}"/>
-        <Button x:Name="ok" Content="OK" Grid.Row="1" Grid.Column="0" ClickMode="Press" VerticalAlignment="Center" FontSize="20" Width="100" Height="50" Background="White" BorderBrush="Black" HorizontalAlignment="Right" Command="{Binding OkButton}"/>
+        <Button x:Name="clear" Content="Clear" Grid.Row="1" Grid.Column="2" ClickMode="Press" VerticalAlignment="Center" FontSize="20" Width="80" Height="40" Background="White" BorderBrush="Black" HorizontalAlignment="Left" Command="{Binding ClearButton}"/>
+        <Button x:Name="ok" Content="OK" Grid.Row="1" Grid.Column="0" ClickMode="Press" VerticalAlignment="Center" FontSize="20" Width="80" Height="40" Background="White" BorderBrush="Black" HorizontalAlignment="Right" Command="{Binding OkButton}"/>
         
         <Grid.RowDefinitions>
             <RowDefinition Height="500"/>
             <RowDefinition Height="50" />
             </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="300" />
-            <ColumnDefinition Width="50" />
-            <ColumnDefinition Width="300" />
+            <ColumnDefinition Width="240" />
+            <ColumnDefinition Width="20" />
+            <ColumnDefinition Width="240" />
         </Grid.ColumnDefinitions>
         
     </Grid>
