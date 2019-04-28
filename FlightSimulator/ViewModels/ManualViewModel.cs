@@ -1,29 +1,26 @@
 ﻿using FlightSimulator.Model;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using FlightSimulator.Views;
 namespace FlightSimulator.ViewModels
 {
     class ManualViewModel
     {
-        ManualModel manual = new ManualModel();
-
+        // Throttle property
         public double Throttle
         {
             set
             {
-                manual.Send("set controls/engines/current-engine/throttle " + Math.Round(value, 2).ToString());
+                // send throttle value to the simulator 
+                CommandChannel.Instance.Send("set controls/engines/current-engine/throttle " + Math.Round(value, 2).ToString());
             }
         }
 
+        // Rudder property
         public double Rudder
         {
             set
             {
-                manual.Send("set controls/flight/rudder " + Math.Round(value, 2).ToString());
+                // send rudder value to the simulator 
+                CommandChannel.Instance.Send("set controls/flight/rudder " + Math.Round(value, 2).ToString());
             }
         }
 

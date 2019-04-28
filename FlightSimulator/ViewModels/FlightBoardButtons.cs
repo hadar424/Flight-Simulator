@@ -41,18 +41,20 @@ namespace FlightSimulator.ViewModels
 
         private void OnConnect()
         {
+            // get info channel port
             int infoPort = ApplicationSettingsModel.Instance.FlightInfoPort;
+            // get command channel port
             int commandoPort = ApplicationSettingsModel.Instance.FlightCommandPort;
+            // get server ip
             string serverIP = ApplicationSettingsModel.Instance.FlightServerIP;
-            Console.WriteLine(infoPort.ToString() + commandoPort + serverIP.ToString());
+            // create and set data to info channel
             InfoChannel.Instance.InfoPort = infoPort;
             InfoChannel.Instance.ServerIP = serverIP;
             InfoChannel.Instance.Start();
-            Console.WriteLine("Info Channel created ");
+            // create and set data to command channel
             CommandChannel.Instance.ServerIP = serverIP;
             CommandChannel.Instance.CommandPort = commandoPort;
             CommandChannel.Instance.Connect();
-
         }
 
         public ICommand DisconnectCommand

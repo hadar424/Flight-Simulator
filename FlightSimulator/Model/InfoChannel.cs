@@ -1,14 +1,9 @@
-﻿using FlightSimulator.Model.Interface;
-using FlightSimulator.ViewModels;
+﻿using FlightSimulator.ViewModels;
 using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Net;
 using System.Net.Sockets;
-using System.Text;
 using System.Threading;
-using System.Threading.Tasks;
 
 namespace FlightSimulator.Model
 {
@@ -61,7 +56,7 @@ namespace FlightSimulator.Model
             IPEndPoint ep = new IPEndPoint(IPAddress.Parse(ip), port);
             listener = new TcpListener(ep);
             listener.Start();
-            Console.WriteLine("Waiting for connections...");
+            // create new thread for the information channel
             infoThread = new Thread(() =>
             {
                 while (!closeThread)
@@ -69,67 +64,52 @@ namespace FlightSimulator.Model
                     try
                     {
                         client = listener.AcceptSocket();
-                        Console.WriteLine(client);
-                        Console.WriteLine("Got new connection");
+                        // read information from the simulator
                         ReadInfo(client);
-
-
                     }
                     catch (SocketException)
                     {
                         break;
                     }
                 }
-                Console.WriteLine("Server stopped");
+                listener.Stop();
             });
             infoThread.Start();
-        }
-        public void Stop()
-        {
-            listener.Stop();
         }
 
         public void ReadInfo(Socket client)
         {
             string info = "";
-
-                if (client.Connected)
+            if (client.Connected)
+            {
+                stream = new NetworkStream(client);
+                reader = new StreamReader(stream);
+                while (!closeThread)
                 {
-                    stream = new NetworkStream(client);
+                    // read one line
+                    info = reader.ReadLine();
+                    HandleInfo(info);
+                    // initialize info buffer
+                    info = "";
 
-                    reader = new StreamReader(stream);
-                    {
-                        while (!closeThread)
-                        {
-
-                            info = reader.ReadLine();
-                            Console.Write(info);
-                            HandleInfo(info);
-                            info = "";
-
-                        }
-                    }
                 }
-
-            
-
+            }
         }
-
         public void HandleInfo(string info)
         {
             if (info != null)
             {
                 int first = info.IndexOf(",");
                 int second = info.IndexOf(",", info.IndexOf(",") + 1);
+                // get the substring of the lon value
                 string lon = info.Substring(0, first - 1);
+                // get the substring of the lat value
                 string lat = info.Substring(first + 1, second - first - 1);
-
+                // convert lon from string to float
                 FlightBoardViewModel.Instance.Lon = float.Parse(lon);
+                // convert lat from string to float
                 FlightBoardViewModel.Instance.Lat = float.Parse(lat);
-
             }
-
-
         }
 
         public void Disconnect()
@@ -137,20 +117,15 @@ namespace FlightSimulator.Model
             if(client.Connected)
             {
                 closeThread = true;
+                // close the thread
                 if (infoThread != null)
                 {
                     infoThread.Abort();
                 }
                 CommandChannel.Instance.Disconnect();
+                // close the socket
                 client.Close();
-            
             }
-
-            if(!client.Connected)
-            {
-                Console.WriteLine("disconnected");
-            }
-
         }
-    }
+    }
 }

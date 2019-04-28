@@ -58,27 +58,25 @@ namespace FlightSimulator.Model
 
         public void Connect()
         {
+            // create new thread for the commands chanel
             commandThread = new Thread(() =>
             {
-            Console.WriteLine("waiting for connect");
-            IPEndPoint ep = new IPEndPoint(IPAddress.Parse(ip), port);
-            client = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
-            while (!client.Connected)
-            {
-                try
+                // create new socket by the given ip and port
+                IPEndPoint ep = new IPEndPoint(IPAddress.Parse(ip), port);
+                client = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
+                while (!client.Connected)
                 {
-                    client.Connect(ep);
-                }
-                catch (SocketException)
-                {
-
-                }
+                    try
+                    {
+                        // try to connect to the simulator as client
+                        client.Connect(ep);
+                    }
+                    catch (SocketException)
+                    {
+                    }
 
             }
             stream = new NetworkStream(client);
-            Console.WriteLine("connected");
-            Console.WriteLine(client.Connected);
-         
             });
             commandThread.Start();
 
@@ -86,6 +84,7 @@ namespace FlightSimulator.Model
 
         public void Send(string s)
         {
+            // create new thread for sending massages
             sendThread = new Thread(() =>
             {
                 if (client.Connected)
@@ -93,21 +92,21 @@ namespace FlightSimulator.Model
                     string commandLine = "";
                     while (s != "")
                     {
+                        // if there is one massage left to send
                         if (s.IndexOf("\n") == -1)
                         {
-                            Console.WriteLine("-last: " + s + "-\n");
                             Byte[] buffer = Encoding.ASCII.GetBytes(s + "\r\n");
+                            // send the massage to the simulator
                             stream.Write(buffer, 0, buffer.Length);
                             s = "";
                         }
+                        // there is several massages to send
                         else
                         {
                             commandLine = s.Substring(0, s.IndexOf("\n") - 1);
                             s = s.Remove(0, s.IndexOf("\n") + 1);
-                            Console.Write("command: " + commandLine + "-\n");
-                            Console.Write("remain: " + s + "-\n");
-                            // לעשות בדיקות קלט לפני שליחה
                             Byte[] buffer = Encoding.ASCII.GetBytes(commandLine + "\r\n");
+                            // send the massage to the simulator
                             stream.Write(buffer, 0, buffer.Length);
                             Thread.Sleep(2000);
                         }
@@ -122,6 +121,7 @@ namespace FlightSimulator.Model
         {
           if(client.Connected)
             {
+                // close threads
                 if(sendThread != null)
                 {
                     sendThread.Abort();
@@ -130,6 +130,7 @@ namespace FlightSimulator.Model
                 {
                     commandThread.Abort();
                 }
+                // close socket
                 client.Close();
             }
 
